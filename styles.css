@@ -1,10 +1,10 @@
 /* CSS Reset & Root Variables */
 :root {
-    --primary-dark: #0d4d4d;
-    --primary-dark-light: #1a5f5f;
-    --primary-dark-lighter: #2a7f7f;
-    --accent-lime: #d4ff00;
-    --accent-lime-hover: #c2e600;
+    --primary-dark: #1e4d5c;
+    --primary-dark-light: #2a6477;
+    --primary-dark-lighter: #3a7b91;
+    --accent-lime: #6ec1e4;
+    --accent-lime-hover: #5aadd1;
     --text-dark: #1a1a1a;
     --text-medium: #666666;
     --text-light: #a8d5d5;
@@ -34,6 +34,7 @@ body {
         linear-gradient(to bottom, var(--gray-light) 1px, transparent 1px);
     background-size: 50px 50px;
     line-height: 1.6;
+   
 }
 
 /* Container */
@@ -135,9 +136,58 @@ nav a:first-child {
     background-color: var(--accent-lime-hover);
 }
 
+.menu-toggle{
+    display: none;
+
+}
+.active{
+    color: var(--primary-dark);
+    font-weight: 600;
+    background-color: var(--accent-lime);
+    padding: 8px 16px;
+    border-radius: 6px;
+}
+.active:hover{
+    background-color: var(--accent-lime-hover);
+}
+
+/* Responsive Header */
+
+@media (max-width: 768px){
+    .nav-links{
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 90px;
+        right: 0;
+        background-color: var(--white);
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        
+    }
+    .show-links{
+        display: flex;
+    }
+    nav {
+        gap: 20px;
+        font-size: 14px;
+    }
+    .header-buttons{
+        display: none;
+    }
+    .menu-toggle{
+        display: block;
+        cursor: pointer;
+        background: transparent;
+        border: none;
+        font-size: 24px;
+        color: var(--primary-dark);
+    }
+}
+
 /* Hero Section */
 .hero {
-    
     padding: 80px 0 60px;
     text-align: center;
 }
