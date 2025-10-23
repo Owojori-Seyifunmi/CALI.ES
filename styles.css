@@ -135,11 +135,6 @@ nav a:first-child {
 .btn-signup:hover {
     background-color: var(--accent-lime-hover);
 }
-
-.menu-toggle{
-    display: none;
-
-}
 .active{
     color: var(--primary-dark);
     font-weight: 600;
@@ -151,40 +146,70 @@ nav a:first-child {
     background-color: var(--accent-lime-hover);
 }
 
-/* Responsive Header */
+/* Desktop Menu Toggle - Hidden by default */
+.menu-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: var(--primary-dark);
+    padding: 8px;
+    z-index: 1001;
+}
 
-@media (max-width: 768px){
-    .nav-links{
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
         display: none;
         flex-direction: column;
         position: absolute;
-        top: 90px;
-        right: 0;
+        top: 80px;
+        right: 10px;
         background-color: var(--white);
         padding: 20px;
         border-radius: 8px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        min-width: 150px;
+        gap: 15px;
     }
-    .show-links{
-        display: flex;
+
+    /* Show navigation when toggle is active */
+    .nav-links.show-links {
+        display: flex !important;
     }
-    nav {
-        gap: 20px;
-        font-size: 14px;
+
+    .nav-links a {
+        padding: 10px 15px;
+        text-align: left;
+        border-radius: 6px;
+        transition: all 0.3s ease;
     }
-    .header-buttons{
+
+    .nav-links a:hover {
+        background-color: rgba(110, 193, 228, 0.1);
+    }
+
+    .header-buttons {
         display: none;
     }
-    .menu-toggle{
-        display: block;
-        cursor: pointer;
-        background: transparent;
-        border: none;
-        font-size: 24px;
-        color: var(--primary-dark);
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+    .nav-links {
+        gap: 25px;
     }
 }
+
+.nav-links {
+    transition: all 0.6s ease-in-out;
+}
+
 
 /* Hero Section */
 .hero {
@@ -218,7 +243,7 @@ nav a:first-child {
     background-color: var(--accent-lime);
     border: none;
     border-radius: 6px;
-    color: var(--text-dark);
+    color: var(--primary-dark);
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
@@ -846,12 +871,12 @@ nav a:first-child {
 
 .decorative-circles {
     position: absolute;
-    top: 40%;
-    right: 20px;
+    top: 50%;
+    right: 90px;
     display: flex;
     flex-direction: column;
     gap: 12px;
-    z-index: 1;
+    z-index: 5;
 }
 
 .circle {

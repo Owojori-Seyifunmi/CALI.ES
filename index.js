@@ -1,18 +1,43 @@
-// RESPONSIVE HEADER
+// ===========================================
+// CONSOLIDATED JAVASCRIPT FOR ALL PAGES
+// ===========================================
 
-const navLinks = document.querySelector('.nav-links');
-const menuToggle = document.querySelector('.menu-toggle');
-
-menuToggle.addEventListener( 'click', function(){
-    navLinks.classList.toggle('show-links');
-})
-
-
-
-// Pricing Page JavaScript
-
-// Billing Toggle Functionality
 document.addEventListener('DOMContentLoaded', function() {
+    
+    // ===========================================
+    // RESPONSIVE NAVBAR TOGGLE
+    // ===========================================
+    const navLinks = document.querySelector('.nav-links');
+    const menuToggle = document.querySelector('.menu-toggle');
+
+    if (menuToggle && navLinks) {
+        console.log('✅ Navbar elements found successfully');
+        
+        menuToggle.addEventListener('click', function() {
+            console.log('🔘 Menu toggle clicked');
+            navLinks.classList.toggle('show-links');
+            console.log('📱 Menu state:', navLinks.classList.contains('show-links') ? 'OPEN' : 'CLOSED');
+        });
+    } else {
+        console.error('❌ Navbar elements not found:', { menuToggle, navLinks });
+    }
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+        if (navLinks && menuToggle) {
+            const isClickInsideNav = navLinks.contains(event.target);
+            const isClickOnToggle = menuToggle.contains(event.target);
+            
+            if (!isClickInsideNav && !isClickOnToggle && navLinks.classList.contains('show-links')) {
+                navLinks.classList.remove('show-links');
+                console.log('📱 Menu closed (outside click)');
+            }
+        }
+    });
+
+    // ===========================================
+    // PRICING PAGE - BILLING TOGGLE
+    // ===========================================
     const billingToggle = document.getElementById('billingToggle');
     const monthlyPrices = document.querySelectorAll('.monthly-price');
     const annualPrices = document.querySelectorAll('.annual-price');
@@ -20,42 +45,45 @@ document.addEventListener('DOMContentLoaded', function() {
     if (billingToggle) {
         billingToggle.addEventListener('change', function() {
             if (this.checked) {
-                // Show annual prices
                 monthlyPrices.forEach(price => price.style.display = 'none');
                 annualPrices.forEach(price => price.style.display = 'inline');
             } else {
-                // Show monthly prices
                 monthlyPrices.forEach(price => price.style.display = 'inline');
                 annualPrices.forEach(price => price.style.display = 'none');
             }
         });
     }
 
-    // FAQ Accordion Functionality
+    // ===========================================
+    // FAQ ACCORDION
+    // ===========================================
     const faqItems = document.querySelectorAll('.faq-item');
     
     faqItems.forEach(item => {
         const question = item.querySelector('.faq-question');
         
-        question.addEventListener('click', function() {
-            const isActive = item.classList.contains('active');
-            
-            // Close all FAQ items
-            faqItems.forEach(faq => faq.classList.remove('active'));
-            
-            // If the clicked item wasn't active, open it
-            if (!isActive) {
-                item.classList.add('active');
-            }
-        });
+        if (question) {
+            question.addEventListener('click', function() {
+                const isActive = item.classList.contains('active');
+                
+                // Close all FAQ items
+                faqItems.forEach(faq => faq.classList.remove('active'));
+                
+                // If the clicked item wasn't active, open it
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        }
     });
 
-    // Smooth scroll for anchor links
+    // ===========================================
+    // SMOOTH SCROLL FOR ANCHOR LINKS
+    // ===========================================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
             
-            // Don't prevent default for just "#"
             if (href !== '#') {
                 const target = document.querySelector(href);
                 if (target) {
@@ -69,7 +97,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Add animation on scroll for pricing cards
+    // ===========================================
+    // SCROLL ANIMATIONS
+    // ===========================================
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -100px 0px'
@@ -101,37 +131,14 @@ document.addEventListener('DOMContentLoaded', function() {
         card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
         observer.observe(card);
     });
-});
 
-
-// Services Page Scroll Animations
-
-document.addEventListener('DOMContentLoaded', function() {
-    
-    // Intersection Observer for scroll animations
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-
-    // Observe all service feature cards with staggered animation
+    // Observe service feature cards
     const serviceCards = document.querySelectorAll('.service-feature-card');
     serviceCards.forEach((card, index) => {
-        // Initial hidden state
         card.style.opacity = '0';
         card.style.transform = 'translateY(30px)';
         
-        // Calculate stagger delay based on card position
-        const staggerDelay = (index % 4) * 0.1; // Reset every 4 cards (for 4-column layout)
+        const staggerDelay = (index % 4) * 0.1;
         card.style.transition = `opacity 0.6s ease ${staggerDelay}s, transform 0.6s ease ${staggerDelay}s`;
         
         observer.observe(card);
@@ -146,8 +153,11 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(card);
     });
 
-    // Observe service numbers with scale animation
+    // ===========================================
+    // SERVICE NUMBERS ANIMATIONS
+    // ===========================================
     const serviceNumbers = document.querySelectorAll('.service-number');
+    
     serviceNumbers.forEach(number => {
         number.style.opacity = '0';
         number.style.transform = 'scale(0.5)';
@@ -165,7 +175,9 @@ document.addEventListener('DOMContentLoaded', function() {
         numberObserver.observe(number);
     });
 
-    // Observe benefit tags with wave animation
+    // ===========================================
+    // BENEFIT TAGS ANIMATIONS
+    // ===========================================
     const benefitsTags = document.querySelectorAll('.benefit-tag');
     benefitsTags.forEach((tag, index) => {
         tag.style.opacity = '0';
@@ -184,7 +196,9 @@ document.addEventListener('DOMContentLoaded', function() {
         tagObserver.observe(tag);
     });
 
-    // Animate section headers
+    // ===========================================
+    // SECTION HEADERS ANIMATIONS
+    // ===========================================
     const sectionHeaders = document.querySelectorAll('.service-header-new');
     sectionHeaders.forEach(header => {
         const h2 = header.querySelector('h2');
@@ -220,39 +234,20 @@ document.addEventListener('DOMContentLoaded', function() {
         headerObserver.observe(header);
     });
 
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            
-            if (href !== '#') {
-                const target = document.querySelector(href);
-                if (target) {
-                    e.preventDefault();
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            }
-        });
-    });
-
-    // Add parallax effect to service numbers
+    // ===========================================
+    // PARALLAX EFFECT FOR SERVICE NUMBERS
+    // ===========================================
     let ticking = false;
     
     window.addEventListener('scroll', function() {
         if (!ticking) {
             window.requestAnimationFrame(function() {
-                const scrolled = window.pageYOffset;
-                
                 serviceNumbers.forEach(number => {
                     const rect = number.getBoundingClientRect();
                     const centerY = rect.top + rect.height / 2;
                     const windowCenter = window.innerHeight / 2;
                     const distance = centerY - windowCenter;
                     
-                    // Only apply parallax when element is near viewport center
                     if (Math.abs(distance) < window.innerHeight / 2) {
                         const parallax = distance * 0.05;
                         number.style.transform = `translateY(${parallax}px) scale(1)`;
@@ -266,10 +261,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Add hover animation enhancement for cards
+    // ===========================================
+    // CARD HOVER ANIMATIONS
+    // ===========================================
     serviceCards.forEach(card => {
         card.addEventListener('mouseenter', function() {
-            // Scale up icon on hover
             const icon = this.querySelector('.card-icon');
             if (icon) {
                 icon.style.transform = 'scale(1.1) rotate(5deg)';
@@ -277,7 +273,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         card.addEventListener('mouseleave', function() {
-            // Reset icon on mouse leave
             const icon = this.querySelector('.card-icon');
             if (icon) {
                 icon.style.transform = 'scale(1) rotate(0deg)';
@@ -285,7 +280,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Add pulse animation to featured badge
+    // ===========================================
+    // FEATURED BADGE PULSE ANIMATION
+    // ===========================================
     const featuredBadge = document.querySelector('.featured-badge');
     if (featuredBadge) {
         setInterval(function() {
@@ -298,7 +295,9 @@ document.addEventListener('DOMContentLoaded', function() {
         featuredBadge.style.transition = 'transform 0.2s ease';
     }
 
-    // Counter animation for service numbers
+    // ===========================================
+    // COUNTER ANIMATION FOR SERVICE NUMBERS
+    // ===========================================
     serviceNumbers.forEach(number => {
         const targetNumber = parseInt(number.textContent);
         let currentNumber = 0;
@@ -308,8 +307,8 @@ document.addEventListener('DOMContentLoaded', function() {
             entries.forEach(entry => {
                 if (entry.isIntersecting && !hasAnimated) {
                     hasAnimated = true;
-                    const duration = 1000; // 1 second
-                    const increment = targetNumber / (duration / 16); // 60fps
+                    const duration = 1000;
+                    const increment = targetNumber / (duration / 16);
                     
                     const counter = setInterval(function() {
                         currentNumber += increment;
@@ -326,5 +325,5 @@ document.addEventListener('DOMContentLoaded', function() {
         numberObserver.observe(number);
     });
 
-    console.log('Services page animations initialized');
+    console.log('✅ All page scripts initialized successfully');
 });
