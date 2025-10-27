@@ -1,4 +1,4 @@
-/* Pricing Page CSS */
+/* Pricing Page CSS - Aligned with Services Page Design */
 
 /* Billing Toggle Section */
 .billing-toggle-section {
@@ -86,7 +86,7 @@
     transform: translateX(28px);
 }
 
-/* Main Pricing Section */
+/* Main Pricing Section - Updated to match Services Page */
 .pricing-section-main {
     padding: 80px 0;
     background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
@@ -99,34 +99,37 @@
     margin-top: 60px;
 }
 
-/* Pricing Cards */
+/* Pricing Cards - Updated Design */
 .pricing-card-main {
     background-color: var(--white);
-    border-radius: 20px;
+    border-radius: 16px;
     padding: 40px 32px;
     display: flex;
     flex-direction: column;
     border: 2px solid var(--border-color);
     transition: all 0.3s ease;
     position: relative;
+    box-shadow: 0 4px 12px rgba(13, 77, 77, 0.08);
+    opacity: 0;
+    transform: translateY(30px);
 }
 
 .pricing-card-main:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 60px rgba(13, 77, 77, 0.15);
+    transform: translateY(-12px);
+    box-shadow: 0 12px 40px rgba(13, 77, 77, 0.15);
     border-color: var(--accent-lime);
 }
 
-/* Featured Card */
+/* Featured Card - Updated to match Services Featured Style */
 .pricing-card-main.featured-card {
     background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-dark-light) 100%);
     border-color: var(--accent-lime);
-    transform: scale(1.05);
+    transform: scale(1.05) translateY(0);
     box-shadow: 0 20px 60px rgba(13, 77, 77, 0.2);
 }
 
 .pricing-card-main.featured-card:hover {
-    transform: scale(1.05) translateY(-8px);
+    transform: scale(1.05) translateY(-12px);
 }
 
 .featured-badge {
@@ -143,14 +146,18 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     box-shadow: 0 4px 12px rgba(110, 193, 228, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
-/* Enterprise Card */
+/* Enterprise Card - Special Styling */
 .pricing-card-main.enterprise-card {
     background: linear-gradient(135deg, rgba(110, 193, 228, 0.1) 0%, rgba(110, 193, 228, 0.05) 100%);
+    border-color: var(--accent-lime);
 }
 
-/* Plan Icon */
+/* Plan Icon - Updated to match Services Page */
 .plan-icon {
     width: 70px;
     height: 70px;
@@ -159,9 +166,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 24px;
+    margin: 0 auto 24px;
     font-size: 32px;
     color: var(--primary-dark);
+    transition: all 0.3s ease;
+}
+
+.pricing-card-main:hover .plan-icon {
+    transform: scale(1.1) rotate(5deg);
 }
 
 .featured-card .plan-icon {
@@ -303,7 +315,7 @@
     flex-shrink: 0;
 }
 
-/* CTA Button */
+/* CTA Button - Updated to match Services Page */
 .pricing-cta-main {
     width: 100%;
     padding: 16px 32px;
@@ -337,7 +349,7 @@
     border-color: var(--white);
 }
 
-/* Add-Ons Section */
+/* Add-Ons Section - Updated Design */
 .addons-section {
     padding: 100px 0;
     background-color: var(--white);
@@ -357,12 +369,15 @@
     text-align: center;
     transition: all 0.3s ease;
     border: 2px solid transparent;
+    box-shadow: 0 4px 12px rgba(13, 77, 77, 0.08);
+    opacity: 0;
+    transform: translateY(30px);
 }
 
 .addon-card:hover {
     background-color: var(--white);
     border-color: var(--accent-lime);
-    transform: translateY(-8px);
+    transform: translateY(-12px);
     box-shadow: 0 12px 40px rgba(13, 77, 77, 0.12);
 }
 
@@ -370,13 +385,18 @@
     width: 70px;
     height: 70px;
     background-color: var(--accent-lime);
-    border-radius: 50%;
+    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 24px;
     font-size: 32px;
     color: var(--primary-dark);
+    transition: all 0.3s ease;
+}
+
+.addon-card:hover .addon-icon {
+    transform: scale(1.1) rotate(5deg);
 }
 
 .addon-card h3 {
@@ -529,10 +549,12 @@
     overflow: hidden;
     border: 2px solid transparent;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(13, 77, 77, 0.06);
 }
 
 .faq-item.active {
     border-color: var(--accent-lime);
+    box-shadow: 0 8px 24px rgba(13, 77, 77, 0.12);
 }
 
 .faq-question {
@@ -600,6 +622,8 @@
 .trust-item {
     text-align: center;
     color: var(--white);
+    opacity: 0;
+    transform: translateY(30px);
 }
 
 .trust-icon {
@@ -613,6 +637,11 @@
     margin: 0 auto 20px;
     font-size: 36px;
     color: var(--primary-dark);
+    transition: all 0.3s ease;
+}
+
+.trust-item:hover .trust-icon {
+    transform: scale(1.1);
 }
 
 .trust-item h3 {
@@ -628,6 +657,38 @@
     line-height: 1.6;
 }
 
+/* Scroll Animation Classes - Same as Services Page */
+.animate-in {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Featured card animation fix */
+.pricing-card-main.featured-card.animate-in {
+    animation: fadeInUpFeatured 0.6s ease forwards;
+}
+
+@keyframes fadeInUpFeatured {
+    from {
+        opacity: 0;
+        transform: scale(1.05) translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1.05) translateY(0);
+    }
+}
+
 /* Responsive Design */
 @media (max-width: 1200px) {
     .pricing-grid-main {
@@ -636,11 +697,15 @@
     }
 
     .pricing-card-main.featured-card {
-        transform: scale(1);
+        transform: scale(1) translateY(0);
     }
 
     .pricing-card-main.featured-card:hover {
-        transform: translateY(-8px);
+        transform: translateY(-12px);
+    }
+
+    .pricing-card-main.featured-card.animate-in {
+        animation: fadeInUp 0.6s ease forwards;
     }
 
     .addons-grid {
@@ -691,8 +756,20 @@
         font-size: 24px;
     }
 
+    .plan-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 28px;
+    }
+
     .addons-grid {
         grid-template-columns: 1fr;
+    }
+
+    .addon-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 28px;
     }
 
     .trust-grid {
@@ -719,4 +796,27 @@
     .trust-section {
         padding: 60px 0;
     }
+
+    .trust-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 32px;
+    }
+}
+
+/* Additional utility classes */
+.mb-40 {
+    margin-bottom: 40px;
+}
+
+.mt-40 {
+    margin-top: 40px;
+}
+
+.pt-80 {
+    padding-top: 80px;
+}
+
+.pb-80 {
+    padding-bottom: 80px;
 }

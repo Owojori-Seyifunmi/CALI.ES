@@ -128,7 +128,10 @@
     color: var(--primary-dark);
     transition: all 0.3s ease;
 }
-
+.card-icon img {
+    width: 40px;
+    height: 40px;
+}
 .service-feature-card:hover .card-icon {
     transform: scale(1.1) rotate(5deg);
 }
@@ -167,9 +170,12 @@
     gap: 12px;
 }
 
-.service-benefits-box h3 i {
-    color: var(--accent-lime);
-    font-size: 28px;
+.service-benefits-box h3 img {
+   
+    width: 32px;
+}
+.service-benefits-box .extra-icon {
+    transform: scaleX(-1);
 }
 
 .benefits-tags {
