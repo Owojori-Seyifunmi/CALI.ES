@@ -1,12 +1,8 @@
-// ===========================================
 // CONSOLIDATED JAVASCRIPT FOR ALL PAGES
-// ===========================================
 
 document.addEventListener('DOMContentLoaded', function() {
     
-    // ===========================================
     // RESPONSIVE NAVBAR TOGGLE
-    // ===========================================
     const navLinks = document.querySelector('.nav-links');
     const menuToggle = document.querySelector('.menu-toggle');
 
@@ -97,9 +93,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // ===========================================
+
     // SCROLL ANIMATIONS
-    // ===========================================
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -100px 0px'
@@ -175,9 +170,7 @@ document.addEventListener('DOMContentLoaded', function() {
         numberObserver.observe(number);
     });
 
-    // ===========================================
     // BENEFIT TAGS ANIMATIONS
-    // ===========================================
     const benefitsTags = document.querySelectorAll('.benefit-tag');
     benefitsTags.forEach((tag, index) => {
         tag.style.opacity = '0';
@@ -196,9 +189,7 @@ document.addEventListener('DOMContentLoaded', function() {
         tagObserver.observe(tag);
     });
 
-    // ===========================================
     // SECTION HEADERS ANIMATIONS
-    // ===========================================
     const sectionHeaders = document.querySelectorAll('.service-header-new');
     sectionHeaders.forEach(header => {
         const h2 = header.querySelector('h2');
@@ -234,9 +225,7 @@ document.addEventListener('DOMContentLoaded', function() {
         headerObserver.observe(header);
     });
 
-    // ===========================================
     // PARALLAX EFFECT FOR SERVICE NUMBERS
-    // ===========================================
     let ticking = false;
     
     window.addEventListener('scroll', function() {
@@ -261,9 +250,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // ===========================================
     // CARD HOVER ANIMATIONS
-    // ===========================================
     serviceCards.forEach(card => {
         card.addEventListener('mouseenter', function() {
             const icon = this.querySelector('.card-icon');
@@ -280,9 +267,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // ===========================================
     // FEATURED BADGE PULSE ANIMATION
-    // ===========================================
     const featuredBadge = document.querySelector('.featured-badge');
     if (featuredBadge) {
         setInterval(function() {
@@ -326,4 +311,135 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     console.log('✅ All page scripts initialized successfully');
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Contact Form Handler
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contactForm');
+    const successMessage = document.getElementById('successMessage');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                phone: document.getElementById('phone').value.trim(),
+                company: document.getElementById('company').value.trim(),
+                service: document.getElementById('service').value,
+                message: document.getElementById('message').value.trim()
+            };
+
+            // Validate required fields
+            if (!formData.name || !formData.email || !formData.phone || !formData.message) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            // Format message for WhatsApp
+            let whatsappMessage = `🔔 *New Contact Form Submission*\n\n`;
+            whatsappMessage += `*Name:* ${formData.name}\n`;
+            whatsappMessage += `*Email:* ${formData.email}\n`;
+            whatsappMessage += `*Phone:* ${formData.phone}\n`;
+            
+            if (formData.company) {
+                whatsappMessage += `*Company:* ${formData.company}\n`;
+            }
+            
+            if (formData.service) {
+                whatsappMessage += `*Service Interest:* ${formData.service}\n`;
+            }
+            
+            whatsappMessage += `\n*Message:*\n${formData.message}`;
+
+            // Encode message for WhatsApp URL
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            
+            // WhatsApp number (without + or spaces)
+            const whatsappNumber = '447884756793';
+            
+            // Create WhatsApp URL
+            const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+            // Also prepare email link as fallback
+            const emailSubject = encodeURIComponent('Contact Form Submission from ' + formData.name);
+            let emailBody = `Name: ${formData.name}%0D%0A`;
+            emailBody += `Email: ${formData.email}%0D%0A`;
+            emailBody += `Phone: ${formData.phone}%0D%0A`;
+            
+            if (formData.company) {
+                emailBody += `Company: ${formData.company}%0D%0A`;
+            }
+            
+            if (formData.service) {
+                emailBody += `Service Interest: ${formData.service}%0D%0A`;
+            }
+            
+            emailBody += `%0D%0AMessage:%0D%0A${encodeURIComponent(formData.message)}`;
+            
+            const emailURL = `mailto:info@calienviromentsupportservices.com?subject=${emailSubject}&body=${emailBody}`;
+
+            // Show success message
+            contactForm.style.display = 'none';
+            successMessage.style.display = 'block';
+
+            // Open WhatsApp in a new tab
+            setTimeout(() => {
+                window.open(whatsappURL, '_blank');
+            }, 500);
+
+            // Also trigger email client (optional - you can remove this if you only want WhatsApp)
+            setTimeout(() => {
+                window.location.href = emailURL;
+            }, 1500);
+
+            // Reset form after 3 seconds
+            setTimeout(() => {
+                contactForm.reset();
+                contactForm.style.display = 'flex';
+                successMessage.style.display = 'none';
+            }, 5000);
+        });
+    }
+
+    // Phone number formatting (optional)
+    const phoneInput = document.getElementById('phone');
+    if (phoneInput) {
+        phoneInput.addEventListener('input', function(e) {
+            // Allow only numbers, spaces, +, and -
+            let value = e.target.value.replace(/[^\d\s\+\-]/g, '');
+            e.target.value = value;
+        });
+    }
+
+    // Email validation (optional)
+    const emailInput = document.getElementById('email');
+    if (emailInput) {
+        emailInput.addEventListener('blur', function(e) {
+            const email = e.target.value;
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (email && !emailPattern.test(email)) {
+                e.target.style.borderColor = '#e74c3c';
+                // You can add an error message here if needed
+            } else {
+                e.target.style.borderColor = '';
+            }
+        });
+    }
 });
