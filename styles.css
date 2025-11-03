@@ -2132,12 +2132,15 @@ nav a:first-child {
 
 .footer-logo {
     margin-bottom: 24px;
+    
 }
 
 .footer-logo img {
-    height: 60px;
+    height: 100px;
     width: auto;
     display: block;
+    background-color: var(--gray-light);
+    border-radius: 50%;
 }
 
 .footer-description {
